@@ -22,4 +22,4 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: true
-          tags: stivenparada/python-app:${GITHUB_SHA::6}
+          tags: stivenparada/python-app:${{ github.sha }}
