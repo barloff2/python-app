@@ -19,8 +19,6 @@ jobs:
         name: Usar la variable de entorno
           run: |
             echo "La variable COMMIT_ID ahora vale: $COMMIT_ID"
-            # También puedes usarla mediante el contexto de env
-            echo "Desde el contexto: ${{ env.COMMIT_ID }}"
       -
         name: Login to Docker Hub
         uses: docker/login-action@v4
