@@ -35,11 +35,18 @@ jobs:
     runs-on: self-hosted
     steps:
       -
+        uses: actions/checkout@v3
+      -
         name: modificar values file
         shell: bash
         run: |
           echo ${{ needs.ci.outputs.commit_id }}
           sed -i "s|@@version@@|${{ needs.ci.outputs.commit_id }}|g" charts/python-app/values.yaml
+      -
+        name: commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Updates values.yaml with commit ${{ needs.ci.outputs.commit_id }}'
       -
         name: Install argocd
         shell: bash
