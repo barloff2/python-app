@@ -44,7 +44,7 @@ jobs:
         shell: bash
         run: |
           echo ${{ needs.ci.outputs.commit_id }}
-          sed -i "s|@@version@@|${{ needs.ci.outputs.commit_id }}|g" charts/python-app/values.yaml
+          sed -i "s/tag: .*/tag: \"${{ needs.ci.outputs.commit_id }}\"/g" charts/python-app/values.yaml
       -
         name: commit changes
         uses: EndBug/add-and-commit@v9
@@ -55,7 +55,6 @@ jobs:
         shell: bash
         run: |
           # 1. Descarga con -L (seguir redirecciones) y -f (fallar si no existe)
-          # NOTA: Asegúrate de que termine en amd64
           curl -sSLf -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
           
           # 2. Verificar si el archivo tiene tamaño (si bajó algo)
