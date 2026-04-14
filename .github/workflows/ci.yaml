@@ -28,10 +28,18 @@ jobs:
         with:
           push: true
           tags: stivenparada/python-app:${{ env.COMMIT_ID }}
+    outputs: 
+      commit_id: ${{ env.COMMIT_ID }}
   cd:
     needs: ci
     runs-on: self-hosted
     steps:
+      -
+        name: modificar values file
+        shell: bash
+        run: |
+          echo ${{ needs.ci.outputs.commit_id }}
+          sed -i "s|@@version@@|${{ needs.ci.outputs.commit_id }}|g" charts/python-app/values.yaml
       -
         name: Install argocd
         shell: bash
