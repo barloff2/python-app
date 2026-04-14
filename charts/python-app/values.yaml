@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: stivenparada/python-app
   pullPolicy: IfNotPresent
-  tag: "cee805"
+  tag: "5283c6"
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
